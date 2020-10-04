@@ -1,9 +1,24 @@
 <template>
   <section class="container">
     <div class="fixed header">
-      <i class="material-icons" @click="index = 0">refresh</i>
+
+
+
+
+      <span class="btn btn--refresher" @click="index = 0">
+          <i class="material-icons">refresh</i>
+      </span>
+
+
+
+
       <span>Voder</span>
+
+
       <i class="material-icons">tune</i>
+
+
+
     </div>
     <div
       v-if="current"
@@ -14,8 +29,8 @@
         v-if="isVisible"
         :interact-out-of-sight-x-coordinate="500"
         :interact-max-rotation="2"
-        :interact-x-threshold="0"
-        :interact-y-threshold="0"
+        :interact-x-threshold="200"
+        :interact-y-threshold="200"
         :interact-event-bus-events="interactEventBus"
         interact-block-drag-down
         @draggedRight="emitAndNext('match')"
@@ -94,7 +109,6 @@ export default {
         { src: 'luiza.jpg', name: 'Luiza', age: 9 },
         { src: 'max.jpg', name: 'Max', age: 6 },
         { src: 'mona.jpg', name: 'Mona', age: 3 },
-        { src: 'naru.jpg', name: 'Naru', age: 7 },
         { src: 'ramdan.jpg', name: 'Ramdan', age: 8 },
         { src: 'rikki-austin.jpg', name: 'Rikki Austin', age: 3 },
         { src: 'tucker.jpg', name: 'Tucker', age: 9 },
@@ -135,7 +149,8 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #eceff1;
+  background: -webkit-linear-gradient(to top, #BC4B51, #084887);
+  background: linear-gradient(to top, #BC4B51, #084887);
   width: 100%;
   height: 100vh;
 }
@@ -149,10 +164,7 @@ export default {
   color: white;
   text-align: center;
   font-style: italic;
-  font-family: 'Engagement', cursive;
-  background: #084887;
-  background: -webkit-linear-gradient(to top, #084887, #f953c6);
-  background: linear-gradient(to top, #BC4B51, #084887);
+  font-family: 'Engagement', cursive; 
   clip-path: polygon(0 0%, 100% 0%, 100% 76%, 0 89%);
   display: flex;
   justify-content: space-between;
@@ -217,6 +229,9 @@ export default {
   &--skip {
     color: green;
   }
+  &--refresher {
+    color: blue
+  }
 }
 
 .flex {
@@ -239,8 +254,8 @@ export default {
   border-radius: 12px;
 }
 .card {
-  width: 10w;
-  height: 10vh;
+  width: 39w;
+  height: 60vh;
   color: white;
   img {
     object-fit: cover;
