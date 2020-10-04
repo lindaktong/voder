@@ -9,3 +9,5 @@ The code we used is centered around the `SlideableCards.veu` file. The software 
 
 The goal of Voder is to act as a source of information in an interactive way. We use a deck of 60 cards, wherein the user can decide to either accept, skip, or reject that card. Each card is based on a certain topic (10 categories in total), and there are 6 cards per category. These cards describe the stances of the presendential candidates (Trump and Biden), and the user can decide whether or not he/she agrees, disagrees, or feels indifferent about the candidate's stance.
 
+The cards were developed via Figma, and uploaded to our files in the `...assets/images' file. 
+
