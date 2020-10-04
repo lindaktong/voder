@@ -3,14 +3,9 @@
     <div class="fixed header">
 
 
-
-
-      <span class="btn btn--refresher" @click="index = 0">
+      <div class="btn btn--refresher" @click="index = 0">
           <i class="material-icons">refresh</i>
-      </span>
-
-
-
+      </div>
 
       <span>Voder</span>
 
@@ -222,6 +217,11 @@ export default {
     i {
       font-size: 32px;
     }
+  
+  }
+  &--refresher {
+    width: 30px;
+    height: 30px;
   }
   &--decline {
     color: red;
