@@ -2,16 +2,17 @@
   <section class="container">
     <div class="fixed header">
 
-
-      <div class="btn btn--refresher" @click="index = 0">
+      
+      <div id="refreshBtn" class="btn btn--refresher" @click="emitAndNext('reset');">
           <i class="material-icons">refresh</i>
       </div>
 
-      <span>Voder</span>
+      <span class="title">
+        <img src="../assets/images/voder.png">
+      </span>
 
 
       <i class="material-icons">tune</i>
-
 
 
     </div>
@@ -37,7 +38,7 @@
             :src="require(`../assets/images/${current.src}`)"
             class="rounded-borders"/>
           <div class="text">
-            <h2>{{current.name}}, <span>{{current.age}}</span></h2>
+            <h2><span>{{current.category}}</span></h2>
           </div>
         </div>
       </Vue2InteractDraggable>
@@ -51,7 +52,7 @@
           :src="require(`../assets/images/${next.src}`)"
           class="rounded-borders"/>
         <div class="text">
-            <h2>{{next.name}}, <span>{{next.age}}</span></h2>
+            <h2><span>{{next.category}}</span></h2>
           </div>
       </div>
     </div>
@@ -73,8 +74,12 @@
           <i class="material-icons">favorite</i>
       </div>
     </div>
+
+
+
   </section>
 </template>
+
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 const EVENTS = {
@@ -82,6 +87,125 @@ const EVENTS = {
   SKIP: 'skip',
   REJECT: 'reject'
 }
+
+let cardList = [
+        { src: 'abortion-t1.jpg', category: 'Abortion'},
+        { src: 'abortion-t2.jpg', category: 'Abortion'},
+        { src: 'abortion-t3.jpg', category: 'Abortion'},
+        { src: 'abortion-b1.jpg', category: 'Abortion'},
+        { src: 'abortion-b2.jpg', category: 'Abortion'},
+        { src: 'abortion-b3.jpg', category: 'Abortion'},
+        
+        { src: 'climate-t1.jpg', category: 'Climate'},
+        { src: 'climate-t2.jpg', category: 'Climate'},
+        { src: 'climate-t3.jpg', category: 'Climate'},
+        { src: 'climate-b1.jpg', category: 'Climate'},
+        { src: 'climate-b2.jpg', category: 'Climate'},
+        { src: 'climate-b3.jpg', category: 'Climate'},
+        
+        { src: 'economy-t1.jpg', category: 'Economy'},
+        { src: 'economy-t2.jpg', category: 'Economy'},
+        { src: 'economy-t3.jpg', category: 'Economy'},
+        { src: 'economy-b1.jpg', category: 'Economy'},
+        { src: 'economy-b2.jpg', category: 'Economy'},
+        { src: 'economy-b3.jpg', category: 'Economy'},
+        
+        { src: 'edu-t1.jpg', category: 'Education'},
+        { src: 'edu-t2.jpg', category: 'Education'},
+        { src: 'edu-t3.jpg', category: 'Education'},
+        { src: 'edu-b1.jpg', category: 'Education'},
+        { src: 'edu-b2.jpg', category: 'Education'},
+        { src: 'edu-b3.jpg', category: 'Education'},
+        
+        { src: 'gun-t1.jpg', category: 'Gun'},
+        { src: 'gun-t2.jpg', category: 'Gun'},
+        { src: 'gun-t3.jpg', category: 'Gun'},
+        { src: 'gun-b1.jpg', category: 'Gun'},
+        { src: 'gun-b2.jpg', category: 'Gun'},
+        { src: 'gun-b3.jpg', category: 'Gun'},
+
+        { src: 'health-t1.jpg', category: 'Health'},
+        { src: 'health-t2.jpg', category: 'Health'},
+        { src: 'health-t3.jpg', category: 'Health'},
+        { src: 'health-b1.jpg', category: 'Health'},
+        { src: 'health-b2.jpg', category: 'Health'},
+        { src: 'health-b3.jpg', category: 'Health'},
+
+        { src: 'immigrant-t1.jpg', category: 'Immigrant'},
+        { src: 'immigrant-t2.jpg', category: 'Immigrant'},
+        { src: 'immigrant-t3.jpg', category: 'Immigrant'},
+        { src: 'immigrant-b1.jpg', category: 'Immigrant'},
+        { src: 'immigrant-b2.jpg', category: 'Immigrant'},
+        { src: 'immigrant-b3.jpg', category: 'Immigrant'},
+              
+        { src: 'lgbtq-t1.jpg', category: 'LGBTQ'},
+        { src: 'lgbtq-t2.jpg', category: 'LGBTQ'},
+        { src: 'lgbtq-t3.jpg', category: 'LGBTQ'},
+        { src: 'lgbtq-b1.jpg', category: 'LGBTQ'},
+        { src: 'lgbtq-b2.jpg', category: 'LGBTQ'},
+        { src: 'lgbtq-b3.jpg', category: 'LGBTQ'},
+
+        { src: 'racial-t1.jpg', category: 'Racial'},
+        { src: 'racial-t2.jpg', category: 'Racial'},
+        { src: 'racial-t3.jpg', category: 'Racial'},
+        { src: 'racial-b1.jpg', category: 'Racial'},
+        { src: 'racial-b2.jpg', category: 'Racial'},
+        { src: 'racial-b3.jpg', category: 'Racial'},
+
+        { src: 'security-t1.jpg', category: 'Security'},
+        { src: 'security-t2.jpg', category: 'Security'},
+        { src: 'security-t3.jpg', category: 'Security'},
+        { src: 'security-b1.jpg', category: 'Security'},
+        { src: 'security-b2.jpg', category: 'Security'},
+        { src: 'security-b3.jpg', category: 'Security'}       
+      ];   
+
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    
+    let actualCardList = [];
+    let firstSixCardList = [];
+
+    for(let i = 0; i < cardList.length; i++)
+    {
+      if(i % 6 === 0 && i !== 0)
+     {
+          actualCardList = actualCardList.concat(shuffle(firstSixCardList));
+          firstSixCardList = [cardList[i]];
+      }
+      else
+      {
+        firstSixCardList[i % 6] = cardList[i];
+      }
+    }
+    actualCardList = actualCardList.concat(shuffle(firstSixCardList));
+
+
+
+    let finalCardList = [];
+    for(let i = 0; i < 6; i++)
+    {
+      finalCardList.push(actualCardList[i], 
+              actualCardList[i+6],
+              actualCardList[i+12],
+              actualCardList[i+18],
+              actualCardList[i+24],
+              actualCardList[i+30],
+              actualCardList[i+36],
+              actualCardList[i+42],
+              actualCardList[i+48],
+              actualCardList[i+54],
+              )
+    }
+    
+
+  let matchedList = [];
+  let rejectedList = [];
 
 export default {
   name: 'SwipeableCards',
@@ -95,21 +219,7 @@ export default {
         draggedLeft: EVENTS.REJECT,
         draggedUp: EVENTS.SKIP
       },
-      cards: [
-        { src: 'karina.jpg', name: 'Karina', age: 7 },
-        { src: 'alexander.jpg', name: 'Alexander', age: 5 },
-        { src: 'bona.jpg', name: 'Bona', age: 3 },
-        { src: 'ichi.jpg', name: 'Ichi', age: 7 },
-        { src: 'lloyd.jpg', name: 'Lloyd', age: 4 },
-        { src: 'luiza.jpg', name: 'Luiza', age: 9 },
-        { src: 'max.jpg', name: 'Max', age: 6 },
-        { src: 'mona.jpg', name: 'Mona', age: 3 },
-        { src: 'ramdan.jpg', name: 'Ramdan', age: 8 },
-        { src: 'rikki-austin.jpg', name: 'Rikki Austin', age: 3 },
-        { src: 'tucker.jpg', name: 'Tucker', age: 9 },
-        { src: 'uriel.jpg', name: 'Uriel', age: 6 },
-        { src: 'zoe.jpg', name: 'Zoe', age: 2 },
-      ]
+      cards: finalCardList
     }
   },
   computed: {
@@ -118,10 +228,10 @@ export default {
     },
     next() {
       return this.cards[this.index + 1]
-    }
+    },
   },
   methods: {
-    match() {
+    match() {    
       InteractEventBus.$emit(EVENTS.MATCH)
     },
     reject() {
@@ -131,16 +241,45 @@ export default {
       InteractEventBus.$emit(EVENTS.SKIP)
     },
     emitAndNext(event) {
+      
       this.$emit(event, this.index)
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
         this.index++
         this.isVisible = true
       }, 200)
+
+      if (event === 'match') {
+
+        matchedList.push(this.cards[this.index].category)
+
+        if(matchedList.length % 10 === 0)
+        {
+          console.log("OMG IT WORKED!");
+        }
+      }
+      else if (event === 'reject') {
+        rejectedList.push(this.cards[this.index].category)
+
+        if(rejectedList.length % 10 === 0)
+        {
+          console.log("OMG IT WORKED!");
+        }
+      }
+     else if(event === 'reset')
+      {
+        this.index = -1;
+        matchedList = [];
+        rejectedList = [];
+      }
     }
   }
+  
 }
+
 </script>
+
+
 
 <style lang="scss" scoped>
 .container {
@@ -185,6 +324,13 @@ export default {
   align-items: center;
 }
 
+#refreshBtn {
+  position: relative;
+  top: 25px;
+  left: 25px;
+
+}
+
 .btn {
   position: relative;
   width: 50px;
@@ -209,6 +355,8 @@ export default {
       content: '';
     }
   }
+
+  
   &--like {
     background-color: red;
     padding: .5rem;
@@ -220,8 +368,8 @@ export default {
   
   }
   &--refresher {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
   }
   &--decline {
     color: red;
@@ -280,7 +428,7 @@ export default {
     bottom: 0;
     width: 100%;
     background:black;
-    background:rgba(0,0,0,0.5);
+    background:rgba(55,80,92,1);
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
     text-indent: 20px;
@@ -302,4 +450,11 @@ export default {
     transform: translate(-50%, -50%);
   }
 }
+
+.title {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+      }
 </style>
