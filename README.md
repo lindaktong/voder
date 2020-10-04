@@ -6,13 +6,13 @@ Welcome to Voder, an online platform of presendential information to help voters
 
 
 
-git clone https://github.com/josephharveyangeles/kittynder
-cd kittynder
+git clone https://github.com/lindaktong/voder
+cd voder
 yarn install
 yarn serve
 
-## Demo
-Demo website is over here: [kittynder.netlify.com](https://kittynder.netlify.com)
+## Inspiration
+[kittynder.netlify.com]
 
 ### Compiles and hot-reloads for development
 ```
