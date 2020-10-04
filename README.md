@@ -9,5 +9,8 @@ The code we used is centered around the `SlideableCards.veu` file. The software 
 
 The goal of Voder is to act as a source of information in an interactive way. We use a deck of 60 cards, wherein the user can decide to either accept, skip, or reject that card. Each card is based on a certain topic (10 categories in total), and there are 6 cards per category. These cards describe the stances of the presendential candidates (Trump and Biden), and the user can decide whether or not he/she agrees, disagrees, or feels indifferent about the candidate's stance.
 
-The cards were developed via Figma, and uploaded to our files in the `...assets/images' file. 
+The cards were developed via Figma, and uploaded to our files in the `assets/images` file. They were then brought into the code as JSON objects, where we included the category that they belonged to for future development in this project. 
 
+To avoid any bias, and to allow our users to use this application more than just one time, we developed a shuffling algorithm for our cards. This algorithm essentially randomizes the cards each time, but not to the extent where a particular category dominates a round of results. We shuffle these cards based on category (as in, we shuffle the 6 cards of the same category seperately from another 6 cards). Then, we make sure that at least 1 card from each category is represented after each round, just so that our users can get a well-rounded detailed report on what they believe in across all topics. 
+
+We had several event handlers that dealt with button functionality as well as swiping functionality. They calculated the results and recorded each card's index and src. This is to ensure that we are not making any errors in recording our data and so that we can be efficient once this project grows to emcompass more than just 60 cards. The event handlers we used were MATCH, REJECT, INFORMATION, SKIP, and REFRESH.
