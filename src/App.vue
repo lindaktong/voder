@@ -6,13 +6,11 @@
 
 <script>
 import SwipeableCards from './components/SwipeableCards.vue';
-// import modal from './components/modal.vue'
 
 export default {
   name: 'app',
   components: { SwipeableCards},
 }
-
 </script>
 
 <style>

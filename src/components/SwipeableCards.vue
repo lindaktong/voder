@@ -1,16 +1,12 @@
 <template>
   <section class="container">
     <div class="fixed header">
-      
-      
       <div id="refreshBtn" class="btn btn--refresher" @click="emitAndNext('reset');">
           <i class="material-icons">refresh</i>
       </div>
-
       <span class="title">
         <img src="../assets/images/Group 24.png" width="200px" height=auto>
       </span>
-
       <div id = "informationBtn" class="btn btn--information" @click="emitAndNext('giveInformation')">
           <i class="material-icons">tune</i>
       </div>
@@ -73,23 +69,12 @@
           <i class="material-icons">favorite</i>
       </div>
     </div>
-
   </section>
-
 </template>
 
-
-
 <script>
-
 import swal from 'sweetalert';
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
-
-import Vue from 'vue'
-import Chartkick from 'vue-chartkick'
-import Chart from 'chart.js'
-
-Vue.use(Chartkick.use(Chart))
 
 const EVENTS = {
   MATCH: 'match',
@@ -194,8 +179,6 @@ let cardList = [
     }
     actualCardList = actualCardList.concat(shuffle(firstSixCardList));
 
-
-
     let finalCardList = [];
     for(let i = 0; i < 6; i++)
     {
@@ -277,7 +260,7 @@ export default {
 
         if(totalLength === 60)
         {
-          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          swal("Thank you for finishing your Voder Test! Here are your results!" + "\n" + 
           "You have identified with " + matchedList[0]+  " of Trump's views and " + 
           matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
           " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
@@ -290,6 +273,7 @@ export default {
           " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip.")
         }
       }
+
       else if (event === 'reject') {
         let png = this.cards[this.index].src;
         let president = png[png.indexOf('-')+1];
@@ -306,7 +290,7 @@ export default {
         let totalLength = rejectedList[0] + rejectedList[1] + matchedList[0] + matchedList[1] + skippedList[0];
         if(totalLength === 60)
         {
-          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          swal("Thank you for finishing your Voder Test! Here are your results!" + "\n" + 
           "You have identified with " + matchedList[0]+  " of Trump's views and " + 
           matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
           " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
@@ -326,7 +310,7 @@ export default {
         let totalLength = rejectedList[0] + rejectedList[1] + matchedList[0] + matchedList[1] + skippedList[0];
         if(totalLength === 60)
         {
-          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          swal("Thank you for finishing your Voder Test! Here are your results!" + "\n" + 
           "You have identified with " + matchedList[0]+  " of Trump's views and " + 
           matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
           " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
@@ -351,9 +335,9 @@ export default {
     else if (event === 'giveInformation')
     {
       this.index -= 1;
-      swal("Hello! We are the creators of Voder! With this project, we aim at providing voters with the data they need to make an informed decision during the 2020 election." +
-      " Identity politics create major bubbles around America, oftentimes furthering the cyclical nature of bias. We" + 
-      " at Voder plan to take action on this pressing issue by giving votors as much information as they need, one swipe at a time!")
+      swal("Hello! We are the creators of Voder! With this project, we aim at providing voters with the knowledge they need to make an informed decision during the 2020 election." +
+      " Identity politics create major bubbles around America, oftentimes furthering the cyclical nature of bias. Moreover, both misinformed and uninformed citizens often vote against"+ 
+      " their best interests. We at Voder plan to take action on this pressing issue by giving votors as much information as they need, one swipe at a time!")
     }
     }
   }
@@ -546,7 +530,7 @@ export default {
 
 .title {
         display: block;
-        margin-left: 23.5%;
+        margin-left: 24.22%;
         margin-right: auto;
         width: 50%;
       }
