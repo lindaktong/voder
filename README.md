@@ -12,7 +12,7 @@ yarn install
 yarn serve
 
 ## Inspiration
-[kittynder.netlify.com]
+kittynder.netlify.com
 
 ### Compiles and hot-reloads for development
 ```
