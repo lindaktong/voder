@@ -8,10 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "core-js": "^2.6.5",
     "serve": "^11.3.2",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.10",
+    "vue-chartkick": "^0.6.1",
     "vue2-interact": "^0.0.3",
     "yarn": "^1.22.10"
   },

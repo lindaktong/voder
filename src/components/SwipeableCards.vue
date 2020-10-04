@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div class="fixed header">
-
+      
       
       <div id="refreshBtn" class="btn btn--refresher" @click="emitAndNext('reset');">
           <i class="material-icons">refresh</i>
@@ -11,9 +11,9 @@
         <img src="../assets/images/Group 24.png" width="200px" height=auto>
       </span>
 
-
-      <i class="material-icons">tune</i>
-
+      <div id = "informationBtn" class="btn btn--information" @click="emitAndNext('giveInformation')">
+          <i class="material-icons">tune</i>
+      </div>
     </div>
     <div
       v-if="current"
@@ -78,9 +78,22 @@
 
 </template>
 
+
+
 <script>
+function myFunction() {
+  alert("hi");
+}
+
 import swal from 'sweetalert';
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
+
+import Vue from 'vue'
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+Vue.use(Chartkick.use(Chart))
+
 const EVENTS = {
   MATCH: 'match',
   SKIP: 'skip',
@@ -203,8 +216,14 @@ let cardList = [
     }
     
 
-  let matchedList = [];
-  let rejectedList = [];
+  let matchedList = [0, 0];
+  let rejectedList = [0, 0];
+  let skippedList = [0];
+
+  // create two arbitrary arrays
+  let categoryList = [];
+  let correspondingWeight = [];
+
 
 
 export default {
@@ -251,27 +270,103 @@ export default {
 
       if (event === 'match') {
 
-        matchedList.push(this.cards[this.index].category)
+        let category = this.cards[this.index].category;
+        let png = this.cards[this.index].src;
+        let president = png[png.indexOf('-')+1];
 
-        if(matchedList.length % 10 === 0)
+        if(president === 't')
         {
-          swal("The candidate that best aligns with your political beliefs is: ---.");
+          matchedList[0] += 1;
+        }
+        else
+        {
+          matchedList[1] += 1;
+        }
+
+        let totalLength = rejectedList[0] + rejectedList[1] + matchedList[0] + matchedList[1] + skippedList[0];
+
+        if(totalLength === 60)
+        {
+          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          "You have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
+          ", thank you so much for participating! We hope that Voder helped you make a better informed decision during the 2020 election!");
+        }
+        else if(totalLength % 10 === 0)
+        {
+          swal("Hey! Congrats on finishing round " + (totalLength/10) + "! So far, you have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip.")
         }
       }
       else if (event === 'reject') {
-        rejectedList.push(this.cards[this.index].category)
+        let category = this.cards[this.index].category;
+        let png = this.cards[this.index].src;
+        let president = png[png.indexOf('-')+1];
 
-        if(rejectedList.length % 10 === 0)
+        if(president === 't')
         {
-          swal("The candidate that best aligns with your political beliefs is: ---.");
+          //index of category, then yoink it from the other array
+          rejectedList[1] += 1;
+        }
+        else
+        {
+          rejectedList[0] += 1;
+        }
+
+        let totalLength = rejectedList[0] + rejectedList[1] + matchedList[0] + matchedList[1] + skippedList[0];
+        if(totalLength === 60)
+        {
+          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          "You have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
+          ", thank you so much for participating! We hope that Voder helped you make a better informed decision during the 2020 election!");
+        }
+        else if(totalLength% 10 === 0)
+        {
+          swal("Hey! Congrats on finishing round " + (totalLength/10) + "! So far, you have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip.")
         }
       }
-     else if(event === 'reset')
+
+      else if (event === 'skip')
+      {
+        skippedList[0] += 1;
+        let totalLength = rejectedList[0] + rejectedList[1] + matchedList[0] + matchedList[1] + skippedList[0];
+        if(totalLength === 60)
+        {
+          swal("Thank you for finishing your Voder Test! Here are your results" + "\n" + 
+          "You have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip. Again"+
+          ", thank you so much for participating! We hope that Voder helped you make a better informed decision during the 2020 election!");
+        }
+        else if(totalLength % 10 === 0)
+        {
+          swal("Hey! Congrats on finishing round " + (totalLength/10) + "! So far, you have identified with " + matchedList[0]+  " of Trump's views and " + 
+          matchedList[1]+ " of Biden's views. Also, you have rejected " + rejectedList[1]+ " of Trump's views" + 
+          " and " + rejectedList[0]+" of Biden's views." + " There were " + skippedList[0] + " views from either candidate that you've decided to skip.")
+ 
+        }
+      }
+
+    else if(event === 'reset')
       {
         this.index = -1;
-        matchedList = [];
-        rejectedList = [];
+        matchedList = [0, 0];
+        rejectedList = [0, 0];
+        skippedList = [0];
       }
+    else if (event === 'giveInformation')
+    {
+      this.index -= 1;
+      swal("Hello! We are the creators of Voder! With this project, we aim at providing voters with the data they need to make an informed decision during the 2020 election." +
+      " Identity politics create major bubbles around America, oftentimes furthering the cyclical nature of bias. We" + 
+      " at Voder plan to take action on this pressing issue by giving votors as much information as they need, one swipe at a time!")
+    }
     }
   }
 }
@@ -327,6 +422,13 @@ export default {
 
 }
 
+#informationBtn {
+  position: relative;
+  top: 25px;
+  right: 25px;
+
+}
+
 .btn {
   position: relative;
   width: 50px;
@@ -367,6 +469,10 @@ export default {
     width: 35px;
     height: 35px;
   }
+  &--information {
+    width: 35px;
+    height: 35px;
+  }
   &--decline {
     color: red;
   }
@@ -374,6 +480,9 @@ export default {
     color: green;
   }
   &--refresher {
+    color: blue
+  }
+  &--information{
     color: blue
   }
 }
@@ -453,9 +562,5 @@ export default {
         margin-right: auto;
         width: 50%;
       }
-
-
-
-
 
 </style>
