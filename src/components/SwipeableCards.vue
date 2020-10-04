@@ -8,12 +8,11 @@
       </div>
 
       <span class="title">
-        <img src="../assets/images/voder.png">
+        <img src="../assets/images/Group 24.png" width="200px" height=auto>
       </span>
 
 
       <i class="material-icons">tune</i>
-
 
     </div>
     <div
@@ -75,12 +74,12 @@
       </div>
     </div>
 
-
-
   </section>
+
 </template>
 
 <script>
+import swal from 'sweetalert';
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 const EVENTS = {
   MATCH: 'match',
@@ -207,6 +206,7 @@ let cardList = [
   let matchedList = [];
   let rejectedList = [];
 
+
 export default {
   name: 'SwipeableCards',
   components: { Vue2InteractDraggable },
@@ -255,7 +255,7 @@ export default {
 
         if(matchedList.length % 10 === 0)
         {
-          console.log("OMG IT WORKED!");
+          swal("The candidate that best aligns with your political beliefs is: ---.");
         }
       }
       else if (event === 'reject') {
@@ -263,7 +263,7 @@ export default {
 
         if(rejectedList.length % 10 === 0)
         {
-          console.log("OMG IT WORKED!");
+          swal("The candidate that best aligns with your political beliefs is: ---.");
         }
       }
      else if(event === 'reset')
@@ -274,12 +274,8 @@ export default {
       }
     }
   }
-  
 }
-
 </script>
-
-
 
 <style lang="scss" scoped>
 .container {
@@ -453,8 +449,13 @@ export default {
 
 .title {
         display: block;
-        margin-left: auto;
+        margin-left: 23.5%;
         margin-right: auto;
-        width: 40%;
+        width: 50%;
       }
+
+
+
+
+
 </style>
