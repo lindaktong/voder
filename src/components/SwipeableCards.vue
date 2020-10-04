@@ -20,7 +20,7 @@
       class="fixed fixed--center"
       style="z-index: 3"
       :class="{ 'transition': isVisible }">
-      <Vue2InteractDraggable
+      <Vue2InteractDraggable 
         v-if="isVisible"
         :interact-out-of-sight-x-coordinate="500"
         :interact-max-rotation="2"
@@ -81,9 +81,6 @@
 
 
 <script>
-function myFunction() {
-  alert("hi");
-}
 
 import swal from 'sweetalert';
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
@@ -220,12 +217,6 @@ let cardList = [
   let rejectedList = [0, 0];
   let skippedList = [0];
 
-  // create two arbitrary arrays
-  let categoryList = [];
-  let correspondingWeight = [];
-
-
-
 export default {
   name: 'SwipeableCards',
   components: { Vue2InteractDraggable },
@@ -270,7 +261,6 @@ export default {
 
       if (event === 'match') {
 
-        let category = this.cards[this.index].category;
         let png = this.cards[this.index].src;
         let president = png[png.indexOf('-')+1];
 
@@ -301,13 +291,11 @@ export default {
         }
       }
       else if (event === 'reject') {
-        let category = this.cards[this.index].category;
         let png = this.cards[this.index].src;
         let president = png[png.indexOf('-')+1];
 
         if(president === 't')
         {
-          //index of category, then yoink it from the other array
           rejectedList[1] += 1;
         }
         else
