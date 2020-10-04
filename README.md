@@ -1,9 +1,11 @@
-# kittynder
-> Tinder for cats.
-
-Holds the result of my experiments on trying to figure out how to build a tinder-like UI using [vue2-interact](https://vue2-interact.netlify.com).
+# Voder
+> Compating Identity Politics, One Swipe At A Time.
 
 ## Getting started
+Welcome to Voder, an online platform of presendential information to help voters across America make an informed decision during the 2020 election!
+
+
+
 git clone https://github.com/josephharveyangeles/kittynder
 cd kittynder
 yarn install
