@@ -16,4 +16,4 @@ To avoid any bias, and to allow our users to use this application more than just
 We had several event handlers that dealt with button functionality as well as swiping functionality. They calculated the results and recorded each card's index and src. This is to ensure that we are not making any errors in recording our data and so that we can be efficient once this project grows to emcompass more than just 60 cards. The event handlers we used were MATCH, REJECT, INFORMATION, SKIP, and REFRESH.
 
 ## The Design
-We know that user interface is very important to people, which is why we spent a lot of time on 'SlideableCards.veu' trying to make our design the best and most interactive. We decided to approach this using Figma for our logo and icon, as well as many CSS and SCSS features to give a simplistic, yet effective, design on Voder.
+We know that user interface is very important to people, which is why we spent a lot of time on 'SlideableCards.vue' trying to make our design the best and most interactive. We decided to approach this using Figma for our logo and icon, as well as many CSS and SCSS features to give a simplistic, yet effective, design on Voder.
